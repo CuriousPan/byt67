@@ -41,8 +41,8 @@ public class Bank {
 	public void openAccount(String accountid) throws AccountExistsException {
 		if (accountlist.containsKey(accountid)) {
 			throw new AccountExistsException();
-		}
-		else {
+		} else {
+			// It should put new values in the account list map, but not get, as it was before.
 			accountlist.put(accountid, new Account("accountid", this.currency));
 		}
 	}
@@ -75,6 +75,7 @@ public class Bank {
 		}
 		else {
 			Account account = accountlist.get(accountid);
+			//The mony should be withdrawn, but now deposited, as it was before.
 			account.withdraw(money);
 		}
 	}
@@ -90,7 +91,7 @@ public class Bank {
 			throw new AccountDoesNotExistException();
 		}
 		else {
-			return accountlist.get(accountid).getBalance().getAmount();
+			return accountlist.get(accountid).getBalance();
 		}
 	}
 

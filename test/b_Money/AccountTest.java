@@ -24,23 +24,28 @@ public class AccountTest {
 	
 	@Test
 	public void testAddRemoveTimedPayment() {
+		//Test of adding and removing timed payments.
 		testAccount.addTimedPayment("Internet", 5, 30, new Money(4400, new Currency("SEK", 0.21)), SweBank, "Alice");
 		testAccount.removeTimedPayment("Internet");
+		assertFalse(testAccount.timedPaymentExists("Internet"));
 	}
 	
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
+		//Test of adding timed payment.
 		testAccount.addTimedPayment("Internet", 5, 30, new Money(4400, new Currency("SEK", 0.21)), SweBank, "Alice");
-		boolean paymentExists = testAccount.timedPaymentExists("Internet");
+		assertTrue(testAccount.timedPaymentExists("Internet"));
 	}
 
 	@Test
 	public void testAddWithdraw() {
+		//Test of withdraw function.
 		testAccount.withdraw(new Money(5200, new Currency("SEK", 0.21)));
 	}
 	
 	@Test
 	public void testGetBalance() {
-		testAccount.getBalance();
+		//Test of getBalance() function.
+		assertEquals(testAccount.getBalance(), (Integer)10000000);
 	}
 }

@@ -25,51 +25,70 @@ public class MoneyTest {
 
 	@Test
 	public void testGetAmount() {
-		fail("Write test case here");
+		//Simple test if getAmount() returns the correct amount.
+		assertEquals(EUR20.getAmount(), (Integer)2000);
+		assertEquals(SEK0.getAmount(), (Integer)0);
 	}
 
 	@Test
 	public void testGetCurrency() {
-		fail("Write test case here");
+		//Simple test if getCurrency() returns the correct currency.
+		assertEquals(SEK100.getCurrency(), SEK);
+	    assertEquals(SEK200.getCurrency(), SEK);
 	}
 
 	@Test
 	public void testToString() {
-		fail("Write test case here");
+		//Test of string representation
+		System.out.println(EUR10.toString());
+		System.out.println(SEK100.toString());
 	}
 
 	@Test
 	public void testGlobalValue() {
-		fail("Write test case here");
+		//Testing of converting amount of the currency to universal amount.
+		assertEquals(EUR10.universalValue(), (Integer)1500);
 	}
 
 	@Test
 	public void testEqualsMoney() {
-		fail("Write test case here");
+		//Testing if some amount of money in a given currency is equal to another one.
+		assertTrue(SEK100.equals(SEK100));
+		assertFalse(SEK100.equals(EUR0));
 	}
 
 	@Test
 	public void testAdd() {
-		fail("Write test case here");
+		//Testing if addition function function works in the proper way.
+		Money SEKnew = SEK200.add(SEK100);
+		assertEquals(SEKnew.getAmount(), (Integer)30000);
 	}
 
 	@Test
 	public void testSub() {
-		fail("Write test case here");
+		//Testing if subtraction function function works in the proper way.
+		Money SEKnew = SEK200.sub(SEK100);
+		assertEquals(SEKnew.getAmount(), (Integer)10000);
 	}
 
 	@Test
 	public void testIsZero() {
-		fail("Write test case here");
+		//Testing is some anount of money is qual to 0.
+		assertTrue(SEK0.isZero());
+		assertFalse(SEK100.isZero());
 	}
 
 	@Test
 	public void testNegate() {
-		fail("Write test case here");
+		//Testing of negating the amount function.
+		assertEquals(SEK100.negate().getAmount(), SEKn100.getAmount());
 	}
 
 	@Test
 	public void testCompareTo() {
-		fail("Write test case here");
+		//Test of compareTo method
+		assertEquals(SEK100.compareTo(SEK100), 0);
+		assertEquals(SEK0.compareTo(SEK100), -1);
+		assertEquals(EUR20.compareTo(EUR10), 1);
 	}
 }

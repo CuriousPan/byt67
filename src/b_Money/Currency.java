@@ -59,12 +59,7 @@ public class Currency {
 	 * @param othercurrency The other Currency
 	*/
 	public Integer valueInThisCurrency(Integer amount, Currency othercurrency) {
-//		int thisAmountInUniversal = universalValue(amount);
-//		int otherAmountInUniversal = othercurrency.universalValue(amount);
-//		float coeff = (otherAmountInUniversal/100.0f)/(thisAmountInUniversal/100.0f);
 		double coeff = othercurrency.rate / this.rate;
-		
 		return (int)(amount * coeff);
-//		double coeff = (this.rate/100.0f)/(othercurrency.rate/100.0f);
 	}
 }

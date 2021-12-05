@@ -38,11 +38,11 @@ public class Money implements Comparable {
 	 */
 	public String toString() {
 		int intPart = this.amount/100;
-		int decimalPart = this.amount - intPart;
+		int decimalPart = this.amount%100;
 		if (decimalPart / 10 == 0) {
-			return new StringBuilder(intPart).append(".").append(decimalPart/10).toString();
+			return (new StringBuilder().append(intPart).append(".").append(decimalPart/10).append(" ").append(currency.getName())).toString();
 		} else {
-			return new StringBuilder(intPart).append(".").append(decimalPart).toString();
+			return (new StringBuilder().append(intPart).append(".").append(decimalPart).append(" ").append(currency.getName())).toString();
 		}
 	}
 	
@@ -60,7 +60,8 @@ public class Money implements Comparable {
 	 * @return A Boolean indicating if the two monies are equal.
 	 */
 	public Boolean equals(Money other) {
-		return this.currency.valueInThisCurrency(getAmount(), other.getCurrency()) == other.getAmount();
+//		return this.currency.valueInThisCurrency(getAmount(), other.getCurrency()) == other.getAmount();
+		return this.currency.valueInThisCurrency(other.amount, other.currency) == this.amount;
 	}
 	
 	/**
@@ -70,7 +71,7 @@ public class Money implements Comparable {
 	 * (Remember to convert the other Money before adding the amounts)
 	 */
 	public Money add(Money other) {
-		return new Money(this.amount + other.getCurrency().valueInThisCurrency(this.amount, this.currency), this.currency);
+		return new Money(this.amount + currency.valueInThisCurrency(other.amount, this.currency), this.currency);
 	}
 
 	/**
@@ -80,7 +81,7 @@ public class Money implements Comparable {
 	 * (Again, remember converting the value of the other Money to this Currency)
 	 */
 	public Money sub(Money other) {
-		return new Money(this.amount - other.getCurrency().valueInThisCurrency(this.amount, this.currency), this.currency);
+		return new Money(this.amount - currency.valueInThisCurrency(other.amount, other.currency), this.currency);
 	}
 	
 	/**
@@ -108,11 +109,14 @@ public class Money implements Comparable {
 	 * A positive integer if this Money is more valuiable than the other Money.
 	 */
 	public int compareTo(Object other) {
-		if (this.currency.valueInThisCurrency(((Money)other).getAmount(), ((Money)other).getCurrency()) < ((Money)other).getAmount()) {
+		if (this.currency.valueInThisCurrency(((Money)other).getAmount(), ((Money)other).getCurrency()) > ((Money)this).getAmount()) {
 			return -1;
-		} else if (this.currency.valueInThisCurrency(((Money)other).getAmount(), ((Money)other).getCurrency()) > ((Money)other).getAmount()) {
+		}
+		
+		if (this.currency.valueInThisCurrency(((Money)other).getAmount(), ((Money)other).getCurrency()) < ((Money)this).getAmount()) {
 			return 1;
 		}
+		
 		return 0;
 	}
 }

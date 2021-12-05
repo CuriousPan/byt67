@@ -69,8 +69,10 @@ public class Account {
 	 * Get balance of account
 	 * @return Amount of Money currently on account
 	 */
-	public Money getBalance() {
-		return content;
+	//It return type was Money, however needed Integer.
+	//Function has to return amount, but it returned just money object.
+	public Integer getBalance() { 
+		return content.getAmount();
 	}
 
 	/* Everything below belongs to the private inner class, TimedPayment */
